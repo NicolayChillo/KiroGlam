@@ -1,0 +1,139 @@
+/* Estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5dc; /* Beige */
+}
+
+/* Estilos del encabezado */
+header {
+    background-color: #f5f5dc; /* Beige */
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem 0;
+}
+
+.navegacion {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.marca {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #556b2f; /* Verde oliva */
+    text-decoration: none;
+}
+
+.lista-navegacion {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.item-navegacion {
+    margin: 0;
+}
+
+.enlace-navegacion {
+    color: #556b2f; /* Verde oliva */
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.enlace-navegacion:hover {
+    color: #6b8e23; /* Verde oliva claro */
+}
+
+/* Estilos de la sección principal */
+.contenedor {
+    margin-top: 50px;
+    padding: 0 1rem;
+}
+
+.fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.columna {
+    flex: 1;
+    min-width: 250px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #556b2f; /* Verde oliva */
+}
+
+p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.btn-primario {
+    background-color: #556b2f; /* Verde oliva */
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.btn-primario:hover {
+    background-color: #6b8e23; /* Verde oliva claro */
+}
+
+/* Estilos de la imagen */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Estilos de la sección de productos */
+.tarjeta {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cuerpo-tarjeta {
+    padding: 1rem;
+}
+
+.titulo-tarjeta {
+    font-size: 1.25rem;
+    color: #556b2f; /* Verde oliva */
+}
+
+.texto-tarjeta {
+    font-size: 1rem;
+    color: #666;
+}
+
+.img-tarjeta {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Estilos del pie de página */
+footer {
+    background-color: #556b2f; /* Verde oliva */
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 0;
+}
