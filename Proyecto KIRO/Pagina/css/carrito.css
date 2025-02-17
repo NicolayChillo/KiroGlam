@@ -1,0 +1,206 @@
+/* Estilos generales*/
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:  #f9f5e3;  
+}
+
+/* Encabezado */
+header {
+    background-color: #f5f5dc;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.marca {
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.navegacion {
+    margin-top: 0.5rem;
+}
+
+.lista-navegacion {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.enlace-navegacion {
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+
+/* Contenedor */
+.contenedor {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos de la tabla del carrito */
+.tabla-carrito {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.tabla-carrito th, .tabla-carrito td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+.tabla-carrito th {
+    background-color:#E8D5B7;
+    color: #fff;
+    text-transform: uppercase;
+}
+.tabla-carrito tr:last-child td {
+    border-bottom: none;
+}
+.btn-eliminar {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-eliminar:hover {
+    background-color: #ff1a1a;
+}
+
+.btn-eliminar i {
+    margin-right: 5px;
+}
+.total-container {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #E8D5B7;
+    margin-top: 15px;
+}
+
+/* Botones de acción */
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secundario {
+    background-color: #E8D5B7;
+    color: #fff;
+}
+
+.btn-secundario:hover {
+    background-color: #d4a65c;
+    transform: scale(1.05);
+}
+
+
+/* Total */
+#total {
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.seccion-pago {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.metodos-pago {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-pago {
+    background-color: #E8D5B7;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+.btn-pago:hover {
+    background-color: #d4a65c;
+}
+
+.formulario-pago {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    display: none; /* Ocultar por defecto */
+}
+
+/* Pie de página */
+footer {
+    background-color: #f9f5e3;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 50px;
+    font-size: 0.9rem;
+    margin: 0;
+} 
+
+footer p{
+    color: #e0e0e0;
+    margin: 0;
+}
+

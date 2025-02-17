@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - KIRO GLAM</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/carrito.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+</head>
+<body>
+    <header class="text-center py-3">
+        <a class="marca" href="index.html">KIRO GLAM</a>
+        <nav class="navegacion">
+            <ul class="lista-navegacion">
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Index.html">Inicio</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Afelpados.html">Afelpados</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Joyas.html">Joyas</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Carteras.html">Carteras</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Varios.html">Varios</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="contenedor mt-5">
+        <h2>Carrito de Compras</h2>
+        <table class="tabla-carrito">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="lista-carrito">
+                <!-- Los productos se cargarán aquí con JavaScript -->
+            </tbody>
+        </table>
+        <p id="total" class="total-container">Total: $0.00</p>
+        <button onclick="vaciarCarrito()" class="btn btn-secundario">Vaciar Carrito</button>
+    
+        <!-- Sección de pago -->
+        <div class="seccion-pago mt-5">
+            <h2>Métodos de Pago</h2>
+            <div class="metodos-pago">
+                <button id="pagar-tarjeta" class="btn-pago">Pagar con Tarjeta</button>
+                <button id="pagar-paypal" class="btn-pago">Pagar con PayPal</button>
+            </div>
+    
+            <!-- Formulario de datos para tarjeta -->
+            <div id="formulario-tarjeta" class="formulario-pago" style="display: none;">
+                <h3>Ingrese los datos de su tarjeta</h3>
+                <form id="form-tarjeta">
+                    <div class="form-group">
+                        <label for="nombre-tarjeta">Nombre en la tarjeta:</label>
+                        <input type="text" id="nombre-tarjeta" name="nombre-tarjeta" required>
+                        <div id="error-nombre" class="error-message" style="color: red; display: none;">Por favor, ingrese el nombre en la tarjeta.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="numero-tarjeta">Número de tarjeta:</label>
+                        <input type="text" id="numero-tarjeta" name="numero-tarjeta" maxlength="19" required>
+                        <div id="error-numero" class="error-message" style="color: red; display: none;">El número de tarjeta debe tener 16 dígitos.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha-expiracion">Fecha de expiración:</label>
+                        <input type="text" id="fecha-expiracion" name="fecha-expiracion" placeholder="MM/YY" maxlength="5" required>
+                        <div id="error-fecha" class="error-message" style="color: red; display: none;">La fecha de expiración debe tener el formato MM/YY y ser válida.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" maxlength="3" required>
+                        <div id="error-cvv" class="error-message" style="color: red; display: none;">El CVV debe tener 3 dígitos.</div>
+                    </div>
+                    <button type="submit" class="btn-pago">Pagar</button>
+                </form>
+            </div>
+    
+            <!-- Formulario de datos para PayPal -->
+            <div id="formulario-paypal" class="formulario-pago" style="display: none;">
+                <h3>Ingrese los datos de PayPal</h3>
+                <form id="form-paypal">
+                    <div class="form-group">
+                        <label for="email-paypal">Correo electrónico de PayPal:</label>
+                        <input type="email" id="email-paypal" name="email-paypal" required>
+                        <div id="error-email" class="error-message" style="color: red; display: none;">Por favor, ingrese un correo electrónico válido.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contrasena-paypal">Contraseña de PayPal:</label>
+                        <input type="password" id="contrasena-paypal" name="contrasena-paypal" required>
+                    </div>
+                    <button type="submit" class="btn-pago">Pagar con PayPal</button>
+                </form>
+            </div>
+        </div>
+    </section>
+   
+
+    <footer class="Footer">
+        <section class="Contactanos">
+            <h2>Contáctanos</h2>
+            <p>Síguenos en nuestras redes sociales:</p>
+            <a href="https://www.instagram.com/tu_pagina" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.facebook.com/tu_pagina" target="_blank">
+                <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="https://www.twitter.com/tu_pagina" target="_blank">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+        </section>
+        <p class="text-center">Desarrollado por DCh</p>
+    </footer>
+    
+    <script>
+        function cargarCarrito() {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            let listaCarrito = document.getElementById("lista-carrito");
+            let total = 0;
+            listaCarrito.innerHTML = ""; // Limpiar la lista antes de cargar
+        
+            if (carrito.length === 0) {
+                // Mostrar mensaje si el carrito está vacío
+                listaCarrito.innerHTML = `
+                    <tr>
+                        <td colspan="3" style="text-align: center; font-style: italic; color: #888;">
+                            No tienes productos en el carrito. ¡Agrega algunos para continuar!
+                        </td>
+                    </tr>
+                `;
+            } else {
+                // Cargar productos si hay elementos en el carrito
+                carrito.forEach((item, index) => {
+                    let fila = document.createElement("tr");
+                    fila.innerHTML = `
+                        <td>${item.nombre}</td>
+                        <td>$${item.precio.toFixed(2)}</td>
+                        <td><button onclick="eliminarDelCarrito(${index})" class="btn-eliminar">Eliminar</button></td>
+                    `;
+                    listaCarrito.appendChild(fila);
+                    total += item.precio;
+                });
+            }
+        
+            // Actualizar el total
+            document.getElementById("total").innerText = `Total: $${total.toFixed(2)}`;
+        }
+
+        function eliminarDelCarrito(index) {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            carrito.splice(index, 1);
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            cargarCarrito();
+        }
+
+        function vaciarCarrito() {
+            localStorage.removeItem("carrito");
+            cargarCarrito();
+        }
+
+        document.addEventListener("DOMContentLoaded", cargarCarrito);
+
+
+        // Pago con tarjeta
+        document.getElementById("pagar-tarjeta").addEventListener("click", function() {
+            document.getElementById("formulario-tarjeta").style.display = "block";
+            document.getElementById("formulario-paypal").style.display = "none";
+        });
+    
+       // Validación del número de tarjeta (16 dígitos con espacios cada 4)
+        document.getElementById("numero-tarjeta").addEventListener("input", function (e) {
+            let input = e.target.value.replace(/\D/g, ""); // Eliminar todos los no dígitos
+            input = input.substring(0, 16); // Limitar a 16 dígitos
+            let formattedInput = "";
+
+            // Agregar espacios cada 4 dígitos
+            for (let i = 0; i < input.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedInput += " ";
+                }
+                formattedInput += input[i];
+            }
+
+            e.target.value = formattedInput;
+
+            // Mostrar u ocultar el mensaje de error
+            let errorNumero = document.getElementById("error-numero");
+            if (input.length < 16) {
+                errorNumero.style.display = "block";
+            } else {
+                errorNumero.style.display = "none";
+            }
+        });
+
+        // Validación de la fecha de expiración (MM/YY)
+        document.getElementById("fecha-expiracion").addEventListener("input", function (e) {
+            let input = e.target.value.replace(/\D/g, ""); // Eliminar todos los no dígitos
+            input = input.substring(0, 4); // Limitar a 4 dígitos
+
+            // Formatear como MM/YY
+            if (input.length > 2) {
+                input = input.substring(0, 2) + "/" + input.substring(2, 4);
+            }
+
+            e.target.value = input;
+
+            // Validar la fecha de expiración
+            let errorFecha = document.getElementById("error-fecha");
+            let [month, year] = input.split("/");
+
+            if (month && year) {
+                let monthNumber = parseInt(month, 10);
+                let yearNumber = parseInt(year, 10);
+
+                if (monthNumber < 1 || monthNumber > 12 || yearNumber < 25) {
+                    errorFecha.style.display = "block";
+                } else {
+                    errorFecha.style.display = "none";
+                }
+            } else {
+                errorFecha.style.display = "block";
+            }
+        });
+
+        // Validación del CVV (solo 3 dígitos)
+        document.getElementById("cvv").addEventListener("input", function (e) {
+            let input = e.target.value.replace(/\D/g, ""); // Eliminar todos los no dígitos
+            input = input.substring(0, 3); // Limitar a 3 dígitos
+            e.target.value = input;
+
+            // Mostrar u ocultar el mensaje de error
+            let errorCvv = document.getElementById("error-cvv");
+            if (input.length < 3) {
+                errorCvv.style.display = "block";
+            } else {
+                errorCvv.style.display = "none";
+            }
+        });
+
+        // Validación del nombre en la tarjeta
+        document.getElementById("nombre-tarjeta").addEventListener("input", function (e) {
+            let input = e.target.value.trim();
+
+            // Mostrar u ocultar el mensaje de error
+            let errorNombre = document.getElementById("error-nombre");
+            if (input === "") {
+                errorNombre.style.display = "block";
+            } else {
+                errorNombre.style.display = "none";
+            }
+        });
+
+        // Validación completa del formulario de tarjeta
+        document.getElementById("form-tarjeta").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevenir el envío del formulario por defecto
+
+            // Obtener los valores de los campos
+            let nombreTarjeta = document.getElementById("nombre-tarjeta").value.trim();
+            let numeroTarjeta = document.getElementById("numero-tarjeta").value.replace(/\D/g, "");
+            let fechaExpiracion = document.getElementById("fecha-expiracion").value;
+            let cvv = document.getElementById("cvv").value.replace(/\D/g, "");
+
+            // Validar el nombre en la tarjeta
+            if (nombreTarjeta === "") {
+                alert("Por favor, ingrese el nombre en la tarjeta.");
+                return;
+            }
+
+            // Validar el número de tarjeta (16 dígitos)
+            if (numeroTarjeta.length !== 16) {
+                alert("El número de tarjeta debe tener 16 dígitos.");
+                return;
+            }
+
+            // Validar la fecha de expiración (MM/YY)
+            let [month, year] = fechaExpiracion.split("/");
+            if (!month || !year || month.length !== 2 || year.length !== 2) {
+                alert("La fecha de expiración debe tener el formato MM/YY.");
+                return;
+            }
+            let monthNumber = parseInt(month, 10);
+            let yearNumber = parseInt(year, 10);
+            if (monthNumber < 1 || monthNumber > 12) {
+                alert("El mes de expiración debe estar entre 01 y 12.");
+                return;
+            }
+            if (yearNumber < 25) {
+                alert("El año de expiración debe ser 25 o superior.");
+                return;
+            }
+
+            // Validar el CVV (3 dígitos)
+            if (cvv.length !== 3) {
+                alert("El CVV debe tener 3 dígitos.");
+                return;
+            }
+
+            // Si todas las validaciones pasan, mostrar el mensaje de pago procesado
+            alert("Pago con tarjeta procesado, Gracias por su compra");
+        });
+        // Pago con PayPal
+        document.getElementById("pagar-paypal").addEventListener("click", function() {
+            document.getElementById("formulario-paypal").style.display = "block";
+            document.getElementById("formulario-tarjeta").style.display = "none";
+        });        
+    
+        // Validación del correo electrónico de PayPal
+        document.getElementById("email-paypal").addEventListener("input", function (e) {
+            let email = e.target.value.trim();
+            let errorEmail = document.getElementById("error-email");
+
+            // Expresión regular para validar el correo electrónico
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (!emailRegex.test(email)) {
+                errorEmail.style.display = "block"; // Mostrar mensaje de error
+            } else {
+                errorEmail.style.display = "none"; // Ocultar mensaje de error
+            }
+        });
+
+        // Validación completa del formulario de PayPal
+        document.getElementById("form-paypal").addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevenir el envío del formulario por defecto
+
+            // Obtener los valores de los campos
+            let emailPaypal = document.getElementById("email-paypal").value.trim();
+            let contrasenaPaypal = document.getElementById("contrasena-paypal").value.trim();
+
+            // Expresión regular para validar el correo electrónico
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            // Validar el correo electrónico
+            if (!emailRegex.test(emailPaypal)) {
+                alert("Por favor, ingrese un correo electrónico válido.");
+                return;
+            }
+
+            // Validar la contraseña
+            if (contrasenaPaypal === "") {
+                alert("Por favor, ingrese su contraseña de PayPal.");
+                return;
+            }
+
+            // Si todas las validaciones pasan, mostrar el mensaje de pago procesado
+            alert("Pago con PayPal procesado, gracias por su compra");
+        }); 
+
+    </script>
+</body>
+</html>

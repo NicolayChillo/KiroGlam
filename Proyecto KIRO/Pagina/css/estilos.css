@@ -9,11 +9,18 @@ body {
 
 /* Estilos del encabezado */
 header {
-    background-color: #f9f5e3;
     border-bottom: 1px solid #dee2e6;
     padding: 1rem 0;
 }
 
+#carrito {
+    color: black;
+    position: absolute;
+    right: 20px; /* Ajusta la distancia desde el borde derecho */
+    top: 20px; /* Ajusta la distancia desde el borde superior */
+    font-size: 24px; /* Tamaño del ícono */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+}
 .navegacion {
     display: flex;  
     justify-content: center;
@@ -135,7 +142,7 @@ p {
 }
 
 .btn-primario {
-    background-color: #6b8e23; /* Verde oliva */
+    background-color: #E8D5B7; /* Verde oliva */
     border: none;
     color: #fff;
     padding: 0.75rem 1.5rem; /* Aumentar el padding */
@@ -149,7 +156,7 @@ p {
 }
 
 .btn-primario:hover {
-    background-color: #556b2f; /* Verde oliva más oscuro */
+    background-color: #d4a65c; /* Verde oliva más oscuro */
     transform: translateY(-2px); /* Efecto de elevación */
 }
 
@@ -159,7 +166,7 @@ p {
     margin-top: 1rem;
     text-decoration: none;
     color: #fff;
-    background-color: #6b8e23; /* Verde oliva */
+    background-color: #E8D5B7; /* Verde oliva */
     border-radius: 8px; /* Bordes más redondeados */
     font-weight: 600; /* Texto más grueso */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
@@ -167,7 +174,7 @@ p {
 }
 
 .btn:hover {
-    background-color: #556b2f; /* Verde oliva más oscuro */
+    background-color: #d4a65c; /* Verde oliva más oscuro */
     transform: translateY(-2px); /* Efecto de elevación */
 }
 
@@ -275,7 +282,7 @@ footer p {
 }
 
 .Contactanos a {
-    color: #080808; /* Verde oliva */
+    color: #080808; 
     font-size: 1.5rem;
     text-decoration: none;
     margin: 0 0.5rem;
@@ -283,7 +290,7 @@ footer p {
 }
 
 .Contactanos a:hover {
-    color: #556b2f; /* Verde oliva más oscuro */
+    color: #d4a65c
 }
 
 /* Estilos de la sección principal con imagen de fondo */
@@ -356,9 +363,7 @@ footer p {
 /* Estilos de la sección de productos afelpados */
 .ProductosP {
     padding: 4rem 1rem; /* Aumentar la altura */
-   
-    text-align: center;
-   
+    text-align: center; 
 }
 
 .ProductosP .fila {
@@ -485,6 +490,6 @@ footer p {
 }
 
 .modal-content button:hover {
-    background-color: #ff1493;  /* Verde oliva más oscuro */
+    background-color: #ff1493;  
     transform: translateY(-2px); /* Efecto de elevación */
 }
