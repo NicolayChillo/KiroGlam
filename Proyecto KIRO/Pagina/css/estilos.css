@@ -9,7 +9,7 @@ body {
 
 /* Estilos del encabezado */
 header {
-    background-color: #f9f5e3;;
+    background-color: #f9f5e3;
     border-bottom: 1px solid #dee2e6;
     padding: 1rem 0;
 }
@@ -413,7 +413,7 @@ footer p {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #f5eed2;
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
