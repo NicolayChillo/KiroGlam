@@ -6,35 +6,31 @@
     <title>KIRO GLAM</title>
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <header class="text-center py-3">
         <a class="marca" href="#">KIRO GLAM</a>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <nav class="navegacion">
             <ul class="lista-navegacion">
-                <li class="item-navegacion"><a class="enlace-navegacion" href="#">Inicio</a></li>
-                <li class="item-navegacion"><a class="enlace-navegacion" href="#">Afelpados</a></li>
-                <li class="item-navegacion"><a class="enlace-navegacion" href="#">Joyas</a></li>
-                <li class="item-navegacion"><a class="enlace-navegacion" href="#">Carteras</a></li>
-                <li class="item-navegacion"><a class="enlace-navegacion" href="#">Varios</a></li>
-                <li class="item-navegacion"><a class="enlace-navegacion" href="#">Contacto</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Index.html">Inicio</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Afelpados.html">Afelpados</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Joyas.html">Joyas</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Carteras.html">Carteras</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Varios.html">Varios</a></li>
+                
             </ul>
         </nav>
     </header>
-    <section class="contenedor mt-5">
-        <div class="fila">
-            <div class="columna">
-                <h1>BIENVENIDO A KIRO GLAM</h1>
-                <p>En Kiro Glam encontrarás todo lo que necesitas para lucir espectacular, desde maquillaje, accesorios, ropa y mucho más.</p>
-                <a href="login.php" class="btn btn-primario">Iniciar Sesión</a>
-                <a href="registro.php" class="btn btn-primario">Registrarse</a>
-            </div>
-            <div class="columna">
-                <img src="../Resources/Banner.png" alt="imagen1" class="img-fluid">
-            </div>
-        </div>
+    <section class="Banner" style="text-wrap: left; width: 100%; height: 65vh;">
+        <h1>BIENVENIDO A KIRO GLAM</h1>
+        <p>Sumérgete en un mundo de ternura y encanto con nuestra tienda, donde encontrarás carteras adorables, joyería kawaii, maquillaje cute y muchas sorpresas más. ¡Dale un toque mágico y dulce a tu estilo con nuestros productos llenos de amor!</p>
+        <button class="btn btn-primario" onclick="openModal('loginModal')">Iniciar Sesión</button>
+        <button class="btn btn-primario" onclick="openModal('registerModal')">Registrarse</button>
+        <img src="../Resources/BannerR.png" alt="imagen1" class="img-fluid-banner">
     </section>
-    <section class="contenedor mt-5">
+    <section class="ProductosP">
         <h2>Productos Destacados</h2>
         <div class="fila">
             <div class="columna">
@@ -79,8 +75,31 @@
             </div>
         </div>
     </section>
-    <footer class="mt-5">
+    
+    <!-- Sección de modos de contacto -->
+    <section class="Contactanos">
+        <h2>Contáctanos</h2>
+        <p>Síguenos en nuestras redes sociales:</p>
+        <a href="https://www.instagram.com/tu_pagina" target="_blank">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https://www.facebook.com/tu_pagina" target="_blank">
+            <i class="fab fa-facebook"></i> Facebook
+        </a>
+        <a href="https://www.twitter.com/tu_pagina" target="_blank">
+            <i class="fab fa-twitter"></i> Twitter
+        </a>
+    </section>
+
+    <footer class="Footer">
         <p class="text-center">Desarrollado por DCh</p>
     </footer>
+
+    <script>
+    function toggleMenu() {
+        const navegacion = document.querySelector('.navegacion');
+        navegacion.classList.toggle('active');
+    }
+    </script>
 </body>
 </html>
