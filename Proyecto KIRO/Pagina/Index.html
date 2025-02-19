@@ -206,7 +206,7 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     const password = document.querySelector('#loginForm #password').value.trim();
 
     if (username && password) {
-        mostrarCampana(); // Ahora se ocultan los botones y aparece la campana solo después de un inicio de sesión exitoso
+        mostrarCampana(); 
         closeModal('loginModal');
     } else {
         alert("Por favor, ingresa un usuario y contraseña válidos.");
@@ -242,7 +242,6 @@ document.getElementById('registroForm').addEventListener('submit', function (eve
         return;
     }
 
-    // Si todo es correcto, mostrar la campana y ocultar los botones
     mostrarCampana();
     closeModal('registerModal');
 });
