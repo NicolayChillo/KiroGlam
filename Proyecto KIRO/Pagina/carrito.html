@@ -432,6 +432,7 @@ function validarEnvio() {
 function generarNumeroPedido() {
     return "#" + Math.floor(Math.random() * 10000); // Número aleatorio entre 0 y 9999
 }
+
         
         function registrarPedido() {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
