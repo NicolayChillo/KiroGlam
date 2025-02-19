@@ -129,7 +129,12 @@ header {
     text-align: right;
     margin-top: 20px;
 }
-
+#map {
+    height: 300px;
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
 .seccion-pago {
     margin-top: 30px;
     padding: 20px;
@@ -143,6 +148,7 @@ header {
     gap: 10px;
     margin-bottom: 20px;
 }
+
 
 .btn-pago {
     background-color: #E8D5B7;

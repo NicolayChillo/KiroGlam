@@ -11,9 +11,14 @@
 <body>
     <header class="text-center py-3">
         <a class="marca" href="#">KIRO GLAM</a>
-        <a href="carrito.html">
-            <i class="fa-solid fa-cart-shopping carrito" id="carrito"></i>
-        </a>
+        <div class="iconos">
+            <a href="HistorialCompras.html">
+                <i class="fa-solid fa-bell campana" id = "campana"></i>
+
+            </a>            <a href="carrito.html">
+                <i class="fa-solid fa-cart-shopping carrito" id="carrito"></i>
+            </a>
+        </div>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <nav class="navegacion">
             <ul class="lista-navegacion">
@@ -87,25 +92,61 @@
         <section class="Contactanos">
             <h2>Contáctanos</h2>
             <p>Síguenos en nuestras redes sociales:</p>
-            <a href="https://www.instagram.com/tu_pagina" target="_blank">
+            <a href="https://www.instagram.com/by_kiro_?igsh=aWYxamN5eTVpd2lu" target="_blank">
                 <i class="fab fa-instagram"></i> Instagram
             </a>
-            <a href="https://www.facebook.com/tu_pagina" target="_blank">
+            <a href="https://www.facebook.com/" target="_blank">
                 <i class="fab fa-facebook"></i> Facebook
             </a>
-            <a href="https://www.twitter.com/tu_pagina" target="_blank">
-                <i class="fab fa-twitter"></i> Twitter
-            </a>
+            
         </section>
         <p class="text-center">Desarrollado por DCh</p>
     </footer>    
-
     <script>
         function toggleMenu() {
             const navegacion = document.querySelector('.navegacion');
             navegacion.classList.toggle('active');
         }
-       
+        //----------------Funcionamiento de modal----------------------
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Cerrar el modal si se hace clic fuera del contenido
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        };
+
+        // Función para guardar el estado en localStorage
+        function guardarEstado() {
+            localStorage.setItem('usuarioLogueado', 'true');
+        }
+
+        // Función para restaurar el estado al cargar la página
+        function restaurarEstado() {
+            const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+            if (usuarioLogueado === 'true') {
+                // Ocultar los botones (si existen)
+                const btnIniciarSesion = document.getElementById('btnIniciarSesion');
+                const btnRegistrarse = document.getElementById('btnRegistrarse');
+                if (btnIniciarSesion) btnIniciarSesion.style.display = 'none';
+                if (btnRegistrarse) btnRegistrarse.style.display = 'none';
+
+                // Mostrar la campana
+                const campana = document.querySelector('.campana');
+                if (campana) campana.style.display = 'block';
+            }
+        }
+
+        // Llamar a restaurarEstado cuando la página se cargue
+        window.onload = restaurarEstado;
+
         // Función para agregar productos al carrito
         function agregarAlCarrito(nombre, precio) {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];

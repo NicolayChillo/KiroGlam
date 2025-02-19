@@ -12,15 +12,30 @@ header {
     border-bottom: 1px solid #dee2e6;
     padding: 1rem 0;
 }
-
-#carrito {
-    color: black;
+.iconos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     position: absolute;
-    right: 20px; /* Ajusta la distancia desde el borde derecho */
-    top: 20px; /* Ajusta la distancia desde el borde superior */
-    font-size: 24px; /* Tamaño del ícono */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+    right: 20px;
+    top: 20px;
 }
+#campana{
+    display: none; /* Oculta la campana inicialmente */
+
+}
+.campana, .carrito {
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    cursor: pointer;
+
+}
+.campana:hover, .carrito:hover {
+    color: #ff69b4; /* Cambia el color al pasar el mouse */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+    transition: color 0.3s, transform 0.3s; /* Agrega una transición suave */
+}
+
 .navegacion {
     display: flex;  
     justify-content: center;

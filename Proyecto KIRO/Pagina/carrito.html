@@ -6,9 +6,9 @@
     <title>Carrito de Compras - KIRO GLAM</title>
     <link rel="stylesheet" href="css/estilos.css">
     <link rel="stylesheet" href="css/carrito.css">
+    <link href="HistorialCompras.html">">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-
 </head>
 <body>
     <header class="text-center py-3">
@@ -39,15 +39,42 @@
         </table>
         <p id="total" class="total-container">Total: $0.00</p>
         <button onclick="vaciarCarrito()" class="btn btn-secundario">Vaciar Carrito</button>
-    
+
+        <!-- Formulario de datos de envío -->
+        <div class="seccion-envio mt-5">
+            <h2>Datos de Envío</h2>
+            <form id="form-envio">
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" required>
+                    <div id="error-direccion" class="error-message" style="color: red; display: none;">Por favor, ingrese la dirección de envío.</div>
+                </div>
+                <div class="form-group">
+                    <label for="nombre-destinatario">Nombre del destinatario:</label>
+                    <input type="text" id="nombre-destinatario" name="nombre-destinatario" required>
+                    <div id="error-nombre-destinatario" class="error-message" style="color: red; display: none;">Por favor, ingrese el nombre del destinatario.</div>
+                </div>
+                <div class="form-group">
+                    <label for="celular">Número de celular:</label>
+                    <input type="text" id="celular" name="celular" required>
+                    <div id="error-celular" class="error-message" style="color: red; display: none;">Por favor, ingrese un número de celular válido.</div>
+                </div>
+                <div class="form-group">
+                    <label for="referencia">Referencia (opcional):</label>
+                    <input type="text" id="referencia" name="referencia">
+                </div>
+                <button type="button" onclick="validarEnvio()" class="btn-pago">Continuar al Pago</button>
+            </form>
+        </div>
+
         <!-- Sección de pago -->
-        <div class="seccion-pago mt-5">
+        <div class="seccion-pago mt-5" style="display: none;" id="seccion-pago">
             <h2>Métodos de Pago</h2>
             <div class="metodos-pago">
                 <button id="pagar-tarjeta" class="btn-pago">Pagar con Tarjeta</button>
                 <button id="pagar-paypal" class="btn-pago">Pagar con PayPal</button>
             </div>
-    
+
             <!-- Formulario de datos para tarjeta -->
             <div id="formulario-tarjeta" class="formulario-pago" style="display: none;">
                 <h3>Ingrese los datos de su tarjeta</h3>
@@ -75,7 +102,7 @@
                     <button type="submit" class="btn-pago">Pagar</button>
                 </form>
             </div>
-    
+
             <!-- Formulario de datos para PayPal -->
             <div id="formulario-paypal" class="formulario-pago" style="display: none;">
                 <h3>Ingrese los datos de PayPal</h3>
@@ -94,32 +121,28 @@
             </div>
         </div>
     </section>
-   
 
     <footer class="Footer">
         <section class="Contactanos">
             <h2>Contáctanos</h2>
             <p>Síguenos en nuestras redes sociales:</p>
-            <a href="https://www.instagram.com/tu_pagina" target="_blank">
+            <a href="https://www.instagram.com/by_kiro_?igsh=aWYxamN5eTVpd2lu" target="_blank">
                 <i class="fab fa-instagram"></i> Instagram
             </a>
-            <a href="https://www.facebook.com/tu_pagina" target="_blank">
+            <a href="https://www.facebook.com/" target="_blank">
                 <i class="fab fa-facebook"></i> Facebook
-            </a>
-            <a href="https://www.twitter.com/tu_pagina" target="_blank">
-                <i class="fab fa-twitter"></i> Twitter
             </a>
         </section>
         <p class="text-center">Desarrollado por DCh</p>
     </footer>
-    
+
     <script>
         function cargarCarrito() {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
             let listaCarrito = document.getElementById("lista-carrito");
             let total = 0;
             listaCarrito.innerHTML = ""; // Limpiar la lista antes de cargar
-        
+
             if (carrito.length === 0) {
                 // Mostrar mensaje si el carrito está vacío
                 listaCarrito.innerHTML = `
@@ -142,7 +165,7 @@
                     total += item.precio;
                 });
             }
-        
+
             // Actualizar el total
             document.getElementById("total").innerText = `Total: $${total.toFixed(2)}`;
         }
@@ -161,14 +184,64 @@
 
         document.addEventListener("DOMContentLoaded", cargarCarrito);
 
+        // Validación del número de celular (09 + 8 dígitos = 10 dígitos en total)
+document.getElementById("celular").addEventListener("input", function (e) {
+    let input = e.target.value.replace(/\D/g, ""); // Eliminar todos los no dígitos
+    input = input.substring(0, 10); // Limitar a 10 dígitos
+    e.target.value = input;
 
+    // Mostrar u ocultar el mensaje de error
+    let errorCelular = document.getElementById("error-celular");
+    if (input.length !== 10 || !input.startsWith("09")) {
+        errorCelular.style.display = "block";
+        errorCelular.innerText = "El número de celular debe comenzar con 09 y tener 10 dígitos.";
+    } else {
+        errorCelular.style.display = "none";
+    }
+});
+
+// Validación completa del formulario de envío
+function validarEnvio() {
+    let direccion = document.getElementById("direccion").value.trim();
+    let nombreDestinatario = document.getElementById("nombre-destinatario").value.trim();
+    let celular = document.getElementById("celular").value.trim();
+    let referencia = document.getElementById("referencia").value.trim();
+
+    // Validar que todos los campos obligatorios estén llenos
+    if (direccion === "") {
+        document.getElementById("error-direccion").style.display = "block";
+        return;
+    } else {
+        document.getElementById("error-direccion").style.display = "none";
+    }
+
+    if (nombreDestinatario === "") {
+        document.getElementById("error-nombre-destinatario").style.display = "block";
+        return;
+    } else {
+        document.getElementById("error-nombre-destinatario").style.display = "none";
+    }
+
+    // Validar el número de celular
+    if (celular.length !== 10 || !celular.startsWith("09")) {
+        document.getElementById("error-celular").style.display = "block";
+        document.getElementById("error-celular").innerText = "El número de celular debe comenzar con 09 y tener 10 dígitos.";
+        return;
+    } else {
+        document.getElementById("error-celular").style.display = "none";
+    }
+
+    // Si todos los campos están llenos, mostrar la sección de pago
+    document.getElementById("seccion-pago").style.display = "block";
+}
+//---------------------Validacion de Pago---------------------------------------------
         // Pago con tarjeta
         document.getElementById("pagar-tarjeta").addEventListener("click", function() {
             document.getElementById("formulario-tarjeta").style.display = "block";
             document.getElementById("formulario-paypal").style.display = "none";
         });
-    
-       // Validación del número de tarjeta (16 dígitos con espacios cada 4)
+
+        // Validación del número de tarjeta (16 dígitos con espacios cada 4)
         document.getElementById("numero-tarjeta").addEventListener("input", function (e) {
             let input = e.target.value.replace(/\D/g, ""); // Eliminar todos los no dígitos
             input = input.substring(0, 16); // Limitar a 16 dígitos
@@ -298,13 +371,17 @@
 
             // Si todas las validaciones pasan, mostrar el mensaje de pago procesado
             alert("Pago con tarjeta procesado, Gracias por su compra");
+            registrarPedido();
+            window.location.href = "HistorialCompras.html";
+
         });
+
         // Pago con PayPal
         document.getElementById("pagar-paypal").addEventListener("click", function() {
             document.getElementById("formulario-paypal").style.display = "block";
             document.getElementById("formulario-tarjeta").style.display = "none";
-        });        
-    
+        });
+
         // Validación del correo electrónico de PayPal
         document.getElementById("email-paypal").addEventListener("input", function (e) {
             let email = e.target.value.trim();
@@ -345,8 +422,51 @@
 
             // Si todas las validaciones pasan, mostrar el mensaje de pago procesado
             alert("Pago con PayPal procesado, gracias por su compra");
-        }); 
+            registrarPedido();
+            window.location.href = "HistorialCompras.html";
 
+        });
+
+        //---------------FUNCION REGISTRO PAGO-------------------
+        // Función para generar un número de pedido único
+function generarNumeroPedido() {
+    return "#" + Math.floor(Math.random() * 10000); // Número aleatorio entre 0 y 9999
+}
+        
+        function registrarPedido() {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            if (carrito.length === 0) {
+                alert("No hay productos en el carrito.");
+                return;
+            }
+        
+            // Calcular el total
+            let total = carrito.reduce((sum, item) => sum + item.precio, 0);
+        
+            // Crear el objeto del pedido
+            let pedido = {
+                numero: generarNumeroPedido(),
+                fecha: new Date().toLocaleDateString(), // Fecha actual
+                productos: carrito.map(item => `${item.nombre} - $${item.precio.toFixed(2)}`),
+                total: total.toFixed(2),
+                estado: "En proceso"
+            };
+        
+            // Guardar el pedido en el localStorage
+            let historial = JSON.parse(localStorage.getItem("historial")) || [];
+            historial.push(pedido);
+            localStorage.setItem("historial", JSON.stringify(historial));
+        
+            // Vaciar el carrito
+            localStorage.removeItem("carrito");
+            alert("Pedido registrado correctamente. Redirigiendo al historial...");
+        
+            // Redirigir a la página de historial
+            window.location.href = "HistorialCompras.html";
+
+            vaciarCarrito();
+
+        }
     </script>
 </body>
 </html>

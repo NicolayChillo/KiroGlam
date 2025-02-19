@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Compras - KIRO GLAM</title>
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/carrito.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .contenedor {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .estado {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .estado.entregado {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .estado.en-proceso {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .estado.cancelado {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <header class="text-center py-3">
+        <a class="marca" href="index.html">KIRO GLAM</a>
+        <div class="iconos">
+            <a href="HistorialCompras.html">
+                <i class="fa-solid fa-bell campana" id="campana"></i>
+            </a>
+            <a href="carrito.html">
+                <i class="fa-solid fa-cart-shopping carrito" id="carrito"></i>
+            </a>
+        </div>
+        <nav class="navegacion">
+            <ul class="lista-navegacion">
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Index.html">Inicio</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Afelpados.html">Afelpados</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Joyas.html">Joyas</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Carteras.html">Carteras</a></li>
+                <li class="item-navegacion"><a class="enlace-navegacion" href="Varios.html">Varios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="contenedor">
+        <h1>Historial de Compras</h1>
+        <table id="historial-table">
+            <thead>
+                <tr>
+                    <th>N° Pedido</th>
+                    <th>Fecha</th>
+                    <th>Productos</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los pedidos se cargarán aquí con JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="Footer">
+        <section class="Contactanos">
+            <h2>Contáctanos</h2>
+            <p>Síguenos en nuestras redes sociales:</p>
+            <a href="https://www.instagram.com/by_kiro_?igsh=aWYxamN5eTVpd2lu" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://www.facebook.com/" target="_blank">
+                <i class="fab fa-facebook"></i> Facebook
+            </a>
+        </section>
+        <p class="text-center">Desarrollado por DCh</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let historial = JSON.parse(localStorage.getItem("historial")) || [];
+            let tbody = document.querySelector("#historial-table tbody");
+
+            if (historial.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align: center; font-style: italic; color: #888;">
+                            No hay pedidos registrados.
+                        </td>
+                    </tr>
+                `;
+            } else {
+                tbody.innerHTML = historial.map(pedido => `
+                    <tr>
+                        <td>${pedido.numero}</td>
+                        <td>${pedido.fecha}</td>
+                        <td>
+                            <ul>
+                                ${pedido.productos.map(producto => `<li>${producto}</li>`).join("")}
+                            </ul>
+                        </td>
+                        <td>$${pedido.total}</td>
+                        <td><span class="estado en-proceso">${pedido.estado}</span></td>
+                    </tr>
+                `).join("");
+            }
+        });
+    </script>
+</body>
+</html>
